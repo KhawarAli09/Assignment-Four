@@ -6,18 +6,18 @@ using namespace std;
 const int MAX_PATIENTS = 100;
 
 struct Patient {
-    int patientID;         
+    int patient_ID;         
     string name;           
     int age;               
     string disease;        
-    int roomNumber;        
+    int room_number;        
 };
 
 Patient patients[MAX_PATIENTS];
 
-int patientCount = 0;
+int patient_count = 0;
 
-void loadPatientsFromFile() {
+void load_patients_from_file() {
     
     ifstream file("patients.txt");
 
@@ -26,20 +26,20 @@ void loadPatientsFromFile() {
         return;
     }
 
-    patientCount = 0;
+    patient_count = 0;
 
-    while (file >> patients[patientCount].patientID) {
+    while (file >> patients[patient_count].patient_ID) {
         file.ignore();
-        getline(file, patients[patientCount].name);
-        file >> patients[patientCount].age;
+        getline(file, patients[patient_count].name);
+        file >> patients[patient_count].age;
         file.ignore();
-        getline(file, patients[patientCount].disease);
-        file >> patients[patientCount].roomNumber;
+        getline(file, patients[patient_count].disease);
+        file >> patients[patient_count].room_number;
         file.ignore();
 
-        patientCount++;
+        patient_count++;
 
-        if (patientCount >= MAX_PATIENTS) {
+        if (patient_count >= MAX_PATIENTS) {
             cout << "Patient capacity reached. Some patients may not be loaded." << endl;
             break;
         }
@@ -49,7 +49,7 @@ void loadPatientsFromFile() {
     cout << "Patients loaded from file successfully!" << endl;
 }
 
-void savePatientsToFile() {
+void save_patients_to_file() {
 
     ofstream file("patients.txt");
 
@@ -58,68 +58,68 @@ void savePatientsToFile() {
         return;
     }
 
-    for (int i = 0; i < patientCount; i++) {
-        file << patients[i].patientID << endl;
+    for (int i = 0; i < patient_count; i++) {
+        file << patients[i].patient_ID << endl;
         file << patients[i].name << endl;
         file << patients[i].age << endl;
         file << patients[i].disease << endl;
-        file << patients[i].roomNumber << endl;
+        file << patients[i].room_number << endl;
     }
 
     file.close();
     cout << "Patients saved to file successfully!" << endl;
 }
 
-void addPatient() {
+void add_patient() {
     cout << "----------------------------------------\n";
-    if (patientCount >= MAX_PATIENTS) {
+    if (patient_count >= MAX_PATIENTS) {
         cout << "Hospital is full, cannot add more patients." << endl;
         return;
     }
 
-    Patient newPatient;
+    Patient new_Patient;
 
     cout << "Enter Patient ID: ";
-    cin >> newPatient.patientID;
+    cin >> new_Patient.patient_ID;
 
     cin.ignore();
 
     cout << "Enter Name: ";
-    getline(cin, newPatient.name);
+    getline(cin, new_Patient.name);
 
     cout << "Enter Age: ";
-    cin >> newPatient.age;
+    cin >> new_Patient.age;
 
     cin.ignore();
 
     cout << "Enter Disease: ";
-    getline(cin, newPatient.disease);
+    getline(cin, new_Patient.disease);
 
     cout << "Enter Room Number: ";
-    cin >> newPatient.roomNumber;
+    cin >> new_Patient.room_number;
 
-    patients[patientCount++] = newPatient;
+    patients[patient_count++] = new_Patient;
     cout << "----------------------------------------\n";
 
     cout << "Patient added successfully!" << endl;
 
-    savePatientsToFile();
+  save_patients_to_file();
 }
 
-void searchPatientByID() {
+void search_patient_by_ID() {
     int id;
     cout << "----------------------------------------\n";
     cout << "Enter Patient ID: ";
     cin >> id;
 
-    for (int i = 0; i < patientCount; i++) {
-        if (patients[i].patientID == id) {
+    for (int i = 0; i < patient_count; i++) {
+        if (patients[i].patient_ID == id) {
             
-            cout << "Patient ID: " << patients[i].patientID << endl;
+            cout << "Patient ID: " << patients[i].patient_ID << endl;
             cout << "Name: " << patients[i].name << endl;
             cout << "Age: " << patients[i].age << endl;
             cout << "Disease: " << patients[i].disease << endl;
-            cout << "Room Number: " << patients[i].roomNumber << endl;
+            cout << "Room Number: " << patients[i].room_number << endl;
             return;
         }
     }
@@ -127,21 +127,21 @@ void searchPatientByID() {
     cout << "Patient not found!" << endl;
 }
 
-void searchPatientByName() {
+void search_patient_by_name() {
     string name;
     cout << "----------------------------------------\n";
     cout << "Enter Name: ";
     cin.ignore();
     getline(cin, name);
 
-    for (int i = 0; i < patientCount; i++) {
+    for (int i = 0; i < patient_count; i++) {
         if (patients[i].name == name) {
           
-            cout << "Patient ID: " << patients[i].patientID << endl;
+            cout << "Patient ID: " << patients[i].patient_ID << endl;
             cout << "Name: " << patients[i].name << endl;
             cout << "Age: " << patients[i].age << endl;
             cout << "Disease: " << patients[i].disease << endl;
-            cout << "Room Number: " << patients[i].roomNumber << endl;
+            cout << "Room Number: " << patients[i].room_number << endl;
             return;
         }
     }
@@ -149,26 +149,26 @@ void searchPatientByName() {
     cout << "Patient not found!" << endl;
 }
 
-void displayAllPatients() {
+void display_all_patients() {
     cout << "----------------------------------------\n";
     
-    if (patientCount == 0) {
+    if (patient_count == 0) {
         cout << "No patients admitted." << endl;
         return;
     }
 
-    for (int i = 0; i < patientCount; i++) {
-        cout << "Patient ID: " << patients[i].patientID << endl;
+    for (int i = 0; i < patient_count; i++) {
+        cout << "Patient ID: " << patients[i].patient_ID << endl;
         cout << "Name: " << patients[i].name << endl;
         cout << "Age: " << patients[i].age << endl;
         cout << "Disease: " << patients[i].disease << endl;
-        cout << "Room Number: " << patients[i].roomNumber << endl;
+        cout << "Room Number: " << patients[i].room_number << endl;
         cout << "----------------------------------------\n";
         
     }
 }
 
-void displayMenu() {
+void display_menu() {
     cout << "----------------------------------------\n";
     cout << "****************************************\n";
     cout << "***Hospital Patient Management System***" << endl;
@@ -181,33 +181,33 @@ void displayMenu() {
 }
 
 int main() {
-    loadPatientsFromFile();
+    load_patients_from_file();
 
     int choice;
 
     while (true) {
-        displayMenu(); 
+        display_menu(); 
         cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice) {
             case 1:
-                addPatient();
+                add_patient();
                 break;
             case 2:
-                searchPatientByID();
+                search_patient_by_ID();
                 break;
             case 3:
-                searchPatientByName();
+                search_patient_by_name();
                 break;
             case 4:
-                displayAllPatients();
+                display_all_patients();
                 break;
             case 5:
                 cout << "********************************\n";
                 cout << "***  \"May allah bless you!\"  ***" << endl;
                 cout << "********************************\n";
-                savePatientsToFile();
+                save_patients_to_file();
                 return 0;
             default:
                 cout << "Invalid choice! Please try again." << endl;
